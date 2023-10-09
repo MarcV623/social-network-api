@@ -43,6 +43,19 @@ router.post('/', async (req, res) => {
   res.status(200).json(thought)
 })
 
+// PUT /api/thoughts/:id
+router.put('/:id', async (req, res) => {
+  const id = req.params.id
+
+  const thought = await Thought.findByIdAndUpdate(id, req.body)
+
+  if (!thought) {
+    return res.status(404).json({ message: 'Thought not found' })
+  }
+
+  res.status(200).json({ message: 'Thought successfully updated!' })
+})
+
 // DELETE /api/thoughts/:id
 router.delete('/:id', async (req, res) => {
   const id = req.params.id
