@@ -26,6 +26,19 @@ router.post('/', async (req, res) => {
   res.status(200).json(user)
 })
 
+// PUT /api/users/:id
+router.put('/:id', async (req, res) => {
+  const id = req.params.id
+
+  const user = await User.findByIdAndUpdate(id, req.body)
+
+  if (!user) {
+    return res.status(404).json({ message: 'User not found' })
+  }
+
+  res.status(200).json({ message: 'User successfully updated!' })
+})
+
 // DELETE /api/users/:id
 router.delete('/:id', async (req, res) => {
   const id = req.params.id
