@@ -20,6 +20,12 @@ router.get('/:id', async (req, res) => {
   res.status(200).json(user)
 })
 
+// POST /api/users
+router.post('/', async (req, res) => {
+  const user = await User.create(req.body)
+  res.status(200).json(user)
+})
+
 // DELETE /api/users/:id
 router.delete('/:id', async (req, res) => {
   const id = req.params.id
